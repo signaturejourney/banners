@@ -3,31 +3,94 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Signature Journey | Expedia Banner</title>
+  <title>Expedia Banner</title>
   <style>
-    html, body { margin: 0; padding: 0; }
-    .wrap { width: 100%; display: flex; justify-content: center; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
+    }
+
+    /* The embed should never be wider than the viewport */
+    .frame {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* This is the element we will scale */
+    .scale-box {
+      transform-origin: 0 0;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
-
-<div class="wrap">
-  <div
-    class="eg-affiliate-banners"
-    data-program="uk-expedia"
-    data-network="pz"
-    data-layout="leaderboard"
-    data-image="city"
-    data-message="explore-world-travel"
-    data-camref="1011l5zjCg"
-    data-pubref=""
-    data-link="stays">
+  <div class="frame" id="frame">
+    <div class="scale-box" id="scaleBox">
+      <div
+        class="eg-affiliate-banners"
+        data-program="uk-expedia"
+        data-network="pz"
+        data-layout="leaderboard"
+        data-image="city"
+        data-message="explore-world-travel"
+        data-camref="1011l5zjCg"
+        data-pubref=""
+        data-link="stays">
+      </div>
+    </div>
   </div>
-</div>
 
-<script class="eg-affiliate-banners-script"
-  src="https://creator.expediagroup.com/products/banners/assets/eg-affiliate-banners.js">
-</script>
+  <script class="eg-affiliate-banners-script"
+    src="https://creator.expediagroup.com/products/banners/assets/eg-affiliate-banners.js">
+  </script>
 
+  <script>
+  (function () {
+    var frame = document.getElementById("frame");
+    var scaleBox = document.getElementById("scaleBox");
+
+    function applyScale() {
+      var injected = document.querySelector(".eg-affiliate-banners iframe");
+      if (!injected) return false;
+
+      var naturalW = injected.offsetWidth || injected.getBoundingClientRect().width;
+      var naturalH = injected.offsetHeight || injected.getBoundingClientRect().height;
+
+      var availableW = frame.clientWidth;
+
+      // Fallback if measurements are temporarily 0
+      if (!naturalW || !naturalH || !availableW) return false;
+
+      var scale = Math.min(1, availableW / naturalW);
+
+      scaleBox.style.transform = "scale(" + scale + ")";
+      scaleBox.style.width = naturalW + "px";
+      scaleBox.style.height = naturalH + "px";
+
+      // Set the document height so the outer embed does not scroll
+      var scaledH = Math.ceil(naturalH * scale);
+      frame.style.height = scaledH + "px";
+      document.documentElement.style.height = scaledH + "px";
+      document.body.style.height = scaledH + "px";
+
+      return true;
+    }
+
+    function tick(attempt) {
+      // Try a few times because the Expedia iframe is injected asynchronously
+      if (applyScale()) return;
+      if (attempt > 30) return;
+      setTimeout(function () { tick(attempt + 1); }, 200);
+    }
+
+    // Initial attempts
+    tick(0);
+
+    // Re-apply on resize/orientation change
+    window.addEventListener("resize", function () { applyScale(); });
+  })();
+  </script>
 </body>
 </html>
