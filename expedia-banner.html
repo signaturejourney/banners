@@ -1,70 +1,33 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Expedia Banner</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: transparent;
-    }
-
-    /* Tight wrapper so there is no extra white area */
-    .ad {
-      display: block;
-      width: 100%;
-      max-width: 970px; /* safe max for leaderboard-like creatives */
-      margin: 0 auto;
-      padding: 0;
-      background: transparent;
-      border: 0;
-      line-height: 0;
-      overflow: hidden;
-    }
-
-    .eg-affiliate-banners {
-      display: block;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      background: transparent;
-      border: 0;
-      line-height: 0;
-      overflow: hidden;
-    }
-
-    /* When Expedia injects an iframe, make it flush */
-    .eg-affiliate-banners iframe {
-      display: block;
-      width: 100%;
-      border: 0;
-      background: transparent;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
-</head>
-<body>
-  <div class="ad" aria-label="Expedia banner">
-    <div
-      class="eg-affiliate-banners"
-      data-program="uk-expedia"
-      data-network="pz"
-      data-layout="leaderboard"
-      data-image="city"
-      data-message="explore-world-travel"
-      data-camref="1011l5zjCg"
-      data-pubref="journal"
-      data-link="stays"
-    ></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expedia banner</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: transparent; }
+      .wrap { display: block; width: 100%; max-width: 1000px; margin: 0 auto; line-height: 0; }
+      .eg-affiliate-banners { width: 100%; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div
+        class="eg-affiliate-banners"
+        data-program="uk-expedia"
+        data-network="pz"
+        data-layout="leaderboard"
+        data-image="city"
+        data-message="explore-world-travel"
+        data-camref="1011l5zjCg"
+        data-pubref="journal"
+        data-link="stays"
+      ></div>
+    </div>
 
     <script
       class="eg-affiliate-banners-script"
       src="https://creator.expediagroup.com/products/banners/assets/eg-affiliate-banners.js"
-      async
     ></script>
-  </div>
-</body>
+  </body>
 </html>
