@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expedia Banner</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: transparent; }
+      .wrap {
+        width: 100%;
+        max-width: 970px; /* leaderboard-friendly */
+        margin: 0 auto;
+        padding: 0;
+        background: transparent;
+        line-height: 0; /* removes whitespace */
+        overflow: hidden;
+      }
+      /* Give the script a place to render into (prevents "blank" feeling while loading) */
+      .eg-affiliate-banners {
+        width: 100%;
+        min-height: 90px;
+        background: transparent;
+      }
+      .eg-affiliate-banners iframe {
+        display: block !important;
+        width: 100% !important;
+        border: 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div
+        class="eg-affiliate-banners"
+        data-program="uk-expedia"
+        data-network="pz"
+        data-layout="leaderboard"
+        data-image="city"
+        data-message="explore-world-travel"
+        data-camref="1011l5zjCg"
+        data-pubref="journal"
+        data-link="stays"
+      ></div>
+
+      <!-- Load AFTER the container exists -->
+      <script
+        class="eg-affiliate-banners-script"
+        src="https://creator.expediagroup.com/products/banners/assets/eg-affiliate-banners.js"
+      ></script>
+    </div>
+  </body>
+</html>
